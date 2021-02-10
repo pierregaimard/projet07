@@ -8,10 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class ProductFixtures extends Fixture
 {
-    private const NAME = 'name';
+    private const NAME        = 'name';
     private const DESCRIPTION = 'description';
-    private const COLORS = 'colors';
-    private const PRICE = 'price';
+    private const COLORS      = 'colors';
+    private const PRICE       = 'price';
 
     public function load(ObjectManager $manager)
     {
@@ -62,7 +62,7 @@ class ProductFixtures extends Fixture
         foreach ($data as $mobile) {
             foreach ($mobile[self::COLORS] as $color) {
                 $count ++;
-                $product = 'mobile' . $count;
+                $product  = 'mobile' . $count;
                 $$product = new Product();
                 $$product->setName(sprintf('%s %s', $mobile[self::NAME], $color));
                 $$product->setDescription($mobile[self::DESCRIPTION]);
