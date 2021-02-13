@@ -21,7 +21,7 @@ abstract class AbstractAppTestCase extends ApiTestCase
     protected function refreshDatabase()
     {
         static::bootKernel();
-        $em = $this->getEntityManager();
+        $em       = $this->getEntityManager();
         $metaData = $em->getMetadataFactory()->getAllMetadata();
 
         $tool = new SchemaTool($em);
