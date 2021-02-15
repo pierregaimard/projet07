@@ -34,11 +34,11 @@ final class ResourceManager implements EventSubscriberInterface
             return null;
         }
 
-        $data = $this->decoder->decode($event->getResponse()->getContent(), 'json');
+        $data        = $this->decoder->decode($event->getResponse()->getContent(), 'json');
         $contentType = $event->getResponse()->headers->get('Content-Type');
 
-        $json = str_contains($contentType, 'application/json');
-        $jsonld = str_contains($contentType, 'application/ld+json');
+        $json    = str_contains($contentType, 'application/json');
+        $jsonld  = str_contains($contentType, 'application/ld+json');
         $jsonhal = str_contains($contentType, 'application/hal+json');
 
         $message = 'Not found';
