@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     collectionOperations: [
         'get' => [
-            'method' => 'get',
+            'method' => 'get'
         ]
     ],
     itemOperations: [
