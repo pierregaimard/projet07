@@ -41,7 +41,7 @@ final class ResourceManager implements EventSubscriberInterface
         $jsonld  = str_contains($contentType, 'application/ld+json');
         $jsonhal = str_contains($contentType, 'application/hal+json');
 
-        $message = 'Not found';
+        $message    = 'Not found';
         $statusCode = 404;
 
         if ($json && is_array($data) && empty($data)) {
