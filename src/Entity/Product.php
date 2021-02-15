@@ -2,14 +2,41 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'get'
+        ]
+    ],
+    itemOperations: [
+        'get' => ['method' => 'get']
+    ],
+    attributes: [
+        'security' => 'is_granted("ROLE_USER")',
+        'pagination_items_per_page' => 10,
+        'pagination_maximum_items_per_page' => 30,
+    ],
+    formats: ['json', 'jsonld', 'jsonhal'],
+    normalizationContext: [
+        'groups' => 'product:read',
+        'swagger_definition_name' => 'Read',
+    ]
+)]
+#[ApiFilter(RangeFilter::class, properties: ['price'])]
+#[ApiFilter(SearchFilter::class, properties: ['name' => 'partial'])]
+#[ApiFilter(OrderFilter::class, properties: ['name', 'price' => 'ASC'], arguments: ['orderParameterName' => 'order'])]
 class Product
 {
     /**
@@ -21,21 +48,25 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Groups("product:read")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("product:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Groups("product:read")
      */
     private $color;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups("product:read")
      */
     private $price;
 

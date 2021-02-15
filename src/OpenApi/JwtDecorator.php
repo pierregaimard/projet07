@@ -44,6 +44,28 @@ final class JwtDecorator implements OpenApiFactoryInterface
             ],
         ]);
 
+        $schemas['BadRequest'] = new ArrayObject([
+            'type' => 'object',
+            'properties' => [
+                'type' => [
+                    'type' => 'string',
+                    'example' => 'https://tools.ietf.org/html/rfc2616#section-10',
+                ],
+                'title' => [
+                    'type' => 'string',
+                    'example' => 'An error occurred',
+                ],
+                'status' => [
+                    'type' => 'integer',
+                    'example' => 400,
+                ],
+                'detail' => [
+                    'type' => 'string',
+                    'example' => 'Invalid request body. You must provide \'username\' and \'password\' keys',
+                ],
+            ],
+        ]);
+
         $pathItem = new Model\PathItem(
             ref: 'JWT Token',
             post: new Model\Operation(
@@ -60,8 +82,20 @@ final class JwtDecorator implements OpenApiFactoryInterface
                             ],
                         ],
                     ],
+                    '400' => [
+                        'description' => 'Bad request',
+                        'content' => [
+                            'application/json' => [
+                                'schema' => [
+                                    '$ref' => '#/components/schemas/BadRequest',
+                                ],
+                            ],
+                        ],
+                    ]
                 ],
                 summary: 'Get JWT token to login.',
+                description: 'Retrieves a JWT Token, who has to be passed in Authorization header to be able to retrieve
+                BileMo API resources. e.g. : \'Authorization: Bearer JWT_TOKEN\'',
                 requestBody: new Model\RequestBody(
                     description: 'Generate new JWT Token',
                     content: new ArrayObject([

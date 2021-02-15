@@ -84,7 +84,8 @@ abstract class AbstractAppTestCase extends ApiTestCase
 
     /**
      * @param Client $client
-     * @param User   $user
+     * @param string $username
+     * @param string $password
      *
      * @return mixed
      * @throws ClientExceptionInterface
@@ -93,12 +94,12 @@ abstract class AbstractAppTestCase extends ApiTestCase
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    protected function getToken(Client $client, User $user)
+    protected function getToken(Client $client, string $username, string $password)
     {
         $response = $client->request('POST', '/login', [
             'json' => [
-                'username' => $user->getUsername(),
-                'password' => $user->getPassword()
+                'username' => $username,
+                'password' => $password
             ]
         ]);
 
@@ -106,5 +107,51 @@ abstract class AbstractAppTestCase extends ApiTestCase
         $this->assertArrayHasKey('token', $response->toArray());
 
         return $response->toArray()['token'];
+    }
+
+    protected function createUserAndGetToken(
+        Client $client,
+        string $username,
+        string $password,
+        array $roles,
+        Customer|string $customer
+    ) {
+        $this->createUser($username, $password, $roles, $customer);
+
+        return $this->getToken($client, $username, $password);
+    }
+
+    /**
+     * @param Client $client
+     * @param string $method
+     * @param string $url
+     * @param string $token
+     *
+     * @throws TransportExceptionInterface
+     */
+    protected function assertMethodNotAllowed(Client $client, string $method, string $url, string $token)
+    {
+        $client->request($method, $url, [
+            'headers' => ['Authorization' => 'Bearer ' . $token]
+        ]);
+
+        $this->assertResponseStatusCodeSame(405);
+    }
+
+    /**
+     * @param Client $client
+     * @param string $method
+     * @param string $url
+     * @param string $token
+     *
+     * @throws TransportExceptionInterface
+     */
+    protected function assertMethodAllowed(Client $client, string $method, string $url, string $token)
+    {
+        $client->request($method, $url, [
+            'headers' => ['Authorization' => 'Bearer ' . $token]
+        ]);
+
+        $this->assertResponseIsSuccessful();
     }
 }
