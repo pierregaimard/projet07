@@ -1,6 +1,13 @@
 api_platform:
+    version: '1.0.0'
+    show_webby: false
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
+    formats:
+        jsonld: [ 'application/ld+json' ]
+        jsonhal: [ 'application/hal+json' ]
+        json: [ 'application/json' ]
+        html: [ 'text/html' ]
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
@@ -9,3 +16,6 @@ api_platform:
             apiKey:
                 name: Authorization
                 type: header
+    defaults:
+        pagination_client_items_per_page: true
+        pagination_items_per_page: 10
