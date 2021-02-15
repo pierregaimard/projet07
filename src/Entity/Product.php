@@ -30,7 +30,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     formats: ['json', 'jsonld', 'jsonhal'],
     normalizationContext: [
-        'groups' => 'product:read'
+        'groups' => 'product:read',
+        'swagger_definition_name' => 'Read',
     ]
 )]
 #[ApiFilter(RangeFilter::class, properties: ['price'])]
