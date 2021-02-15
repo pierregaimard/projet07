@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CustomErrorResponseManager
 {
-    public const TYPE_JSON = 'App\Service\Response\JsonErrorResponse';
-    public const TYPE_JSONLD = 'App\Service\Response\JsonldErrorResponse';
+    public const TYPE_JSON    = 'App\Service\Response\JsonErrorResponse';
+    public const TYPE_JSONLD  = 'App\Service\Response\JsonldErrorResponse';
     public const TYPE_JSONHAL = 'App\Service\Response\JsonhalErrorResponse';
 
     /**
