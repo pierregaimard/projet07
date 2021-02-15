@@ -15,8 +15,8 @@ class ProductDecorator implements OpenApiFactoryInterface
 
     public function __invoke(array $context = []): OpenApi
     {
-        $openApi = ($this->decorated)($context);
-        $schemas = $openApi->getComponents()->getSchemas();
+        $openApi         = ($this->decorated)($context);
+        $schemas         = $openApi->getComponents()->getSchemas();
         $productPathItem = $openApi->getPaths()->getPath('/products');
 
         $schemas['NotFound.json'] = new ArrayObject([
@@ -63,7 +63,7 @@ class ProductDecorator implements OpenApiFactoryInterface
             ],
         ]);
 
-        $responses = $productPathItem->getGet()->getResponses();
+        $responses        = $productPathItem->getGet()->getResponses();
         $responses['404'] = new Response(
             description: 'No product found when using criteria',
             content: new ArrayObject(
