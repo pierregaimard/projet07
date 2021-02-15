@@ -31,7 +31,7 @@ class LoginChecker implements EventSubscriberInterface
         }
 
         $statusCode = 400;
-        $type = $this->errorResponseManager->getErrorType($event->getRequest()->headers->get('accept'));
+        $type       = $this->errorResponseManager->getErrorType($event->getRequest()->headers->get('accept'));
 
         if ($type === false) {
             return;
