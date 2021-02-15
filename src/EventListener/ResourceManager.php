@@ -34,6 +34,11 @@ final class ResourceManager implements EventSubscriberInterface
             return null;
         }
 
+        # For symfony debug tool bar
+        if ($event->getRequest()->isXmlHttpRequest()) {
+            return null;
+        }
+
         $data        = $this->decoder->decode($event->getResponse()->getContent(), 'json');
         $contentType = $event->getResponse()->headers->get('Content-Type');
 
