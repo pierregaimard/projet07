@@ -14,7 +14,7 @@ abstract class AbstractProductTestCase extends AbstractAppTestCase
 
     protected function setProductsFixtures()
     {
-        $em = $this->getEntityManager();
+        $manager = $this->getEntityManager();
         $mobiles = [
             [
                 self::NAME => 'BileMo X4-LG20 Test',
@@ -68,10 +68,10 @@ abstract class AbstractProductTestCase extends AbstractAppTestCase
                 $$product->setDescription($mobile[self::DESCRIPTION]);
                 $$product->setColor($color);
                 $$product->setPrice($mobile[self::PRICE]);
-                $em->persist($$product);
+                $manager->persist($$product);
             }
         }
 
-        $em->flush();
+        $manager->flush();
     }
 }
