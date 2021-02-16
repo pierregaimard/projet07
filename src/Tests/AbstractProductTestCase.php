@@ -2,7 +2,6 @@
 
 namespace App\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 use App\Entity\Product;
 
 abstract class AbstractProductTestCase extends AbstractAppTestCase
@@ -12,7 +11,7 @@ abstract class AbstractProductTestCase extends AbstractAppTestCase
     private const COLORS      = 'colors';
     private const PRICE       = 'price';
 
-    protected function setProductsFixtures()
+    protected function loadProductsFixtures()
     {
         $manager = $this->getEntityManager();
         $mobiles = [
