@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Resource;
+namespace App\Tests\ProductResource;
 
 use App\Tests\AbstractProductTestCase;
 
@@ -9,7 +9,7 @@ class ProductResourceCollectionTest extends AbstractProductTestCase
     public function testGetCollection()
     {
         $this->refreshDatabase();
-        $this->setProductsFixtures();
+        $this->loadProductsFixtures();
         $client = self::createClient();
         $token = $this->createUserAndGetToken($client, 'test', 'pass', ['ROLE_USER'], 'myCompagny');
 
@@ -35,7 +35,7 @@ class ProductResourceCollectionTest extends AbstractProductTestCase
     public function testGetCollectionWithParams()
     {
         $this->refreshDatabase();
-        $this->setProductsFixtures();
+        $this->loadProductsFixtures();
         $client = self::createClient();
         $this->createUser('test', 'pass', ['ROLE_USER'], 'myCompagny');
         $token = $this->getToken($client, 'test', 'pass');

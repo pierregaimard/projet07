@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Resource;
+namespace App\Tests\ProductResource;
 
 use App\Tests\AbstractProductTestCase;
 
@@ -9,7 +9,7 @@ class ProductResourceAuthorizationTest extends AbstractProductTestCase
     public function testGetAuthorization()
     {
         $this->refreshDatabase();
-        $this->setProductsFixtures();
+        $this->loadProductsFixtures();
         $client = self::createClient();
 
         # Unauthorized access for not authenticated requests
