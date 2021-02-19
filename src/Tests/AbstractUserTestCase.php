@@ -26,7 +26,7 @@ class AbstractUserTestCase extends AbstractAppTestCase
         $adminOne->setUsername('pgaimard');
         $adminOne->setEmail('pierre@flexcon.fr');
         $adminOne->setPassword($pwEncoder->encodePassword($adminOne, 'pass'));
-        $adminOne->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $adminOne->setRoles(['ROLE_ADMIN']);
         $adminOne->setCustomer($customerOne);
         $manager->persist($adminOne);
 
@@ -42,7 +42,7 @@ class AbstractUserTestCase extends AbstractAppTestCase
         $adminTwo->setUsername('jsanza');
         $adminTwo->setEmail('jeff@best-platform.fr');
         $adminTwo->setPassword($pwEncoder->encodePassword($adminOne, 'pass'));
-        $adminTwo->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $adminTwo->setRoles(['ROLE_ADMIN']);
         $adminTwo->setCustomer($customerTwo);
         $manager->persist($adminTwo);
 
