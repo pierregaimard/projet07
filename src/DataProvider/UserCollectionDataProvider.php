@@ -30,7 +30,7 @@ final class UserCollectionDataProvider implements ContextAwareCollectionDataProv
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): Paginator
     {
         # Set custom queryBuilder
-        $customer = $this->security->getUser()->getCustomer();
+        $customer     = $this->security->getUser()->getCustomer();
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('u')
             ->from(User::class, 'u')
