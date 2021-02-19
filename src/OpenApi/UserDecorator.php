@@ -18,7 +18,7 @@ class UserDecorator implements OpenApiFactoryInterface
         $openApi       = ($this->decorated)($context);
         $schemas       = $openApi->getComponents()->getSchemas();
         $usersPathItem = $openApi->getPaths()->getPath('/users');
-        $userPathItem = $openApi->getPaths()->getPath('/users/{id}');
+        $userPathItem  = $openApi->getPaths()->getPath('/users/{id}');
 
         # Unprocessable entity schema
         $schemas['UnprocessableEntity'] = new ArrayObject([
@@ -63,6 +63,7 @@ class UserDecorator implements OpenApiFactoryInterface
         $getCollectionResponses['404'] = new Response(
             description: 'No user found when using pagination or search criteria'
         );
+
         $get = $usersPathItem->getGet()->withResponses($getCollectionResponses);
 
         # Collection > post
@@ -76,7 +77,16 @@ class UserDecorator implements OpenApiFactoryInterface
                 ['application/json' => ['schema' => ['$ref' => '#/components/schemas/UnprocessableEntity']]]
             )
         );
+
         $post = $usersPathItem->getPost()->withResponses($postCollectionResponses);
+
+        # add collection data to openApi
+        $openApi->getPaths()->addPath(
+            '/users',
+            $usersPathItem
+                ->withGet($get)
+                ->withPost($post)
+        );
 
         # Item > get
         $getItemResponses        = $userPathItem->getGet()->getResponses();
@@ -84,6 +94,7 @@ class UserDecorator implements OpenApiFactoryInterface
             description: 'Access forbidden when the logged user is not an admin or if required resource is from an other
                 company'
         );
+
         $get = $userPathItem->getGet()->withResponses($getItemResponses);
 
         # Item > delete
@@ -92,6 +103,7 @@ class UserDecorator implements OpenApiFactoryInterface
             description: 'Access forbidden when the logged user is not an admin, if the resource you want to delete is
                 from an other company or if the resource is the logged user'
         );
+
         $delete = $userPathItem->getDelete()->withResponses($deleteItemResponses);
 
         # Item > patch
@@ -106,16 +118,10 @@ class UserDecorator implements OpenApiFactoryInterface
                 ['application/json' => ['schema' => ['$ref' => '#/components/schemas/UnprocessableEntity']]]
             )
         );
+
         $patch = $userPathItem->getPatch()->withResponses($patchItemResponses);
 
-        # add collection & item data to openApi
-        $openApi->getPaths()->addPath(
-            '/users',
-            $usersPathItem
-                ->withGet($get)
-                ->withPost($post)
-        );
-
+        # add item data to openApi
         $openApi->getPaths()->addPath(
             '/users/{id}',
             $userPathItem
