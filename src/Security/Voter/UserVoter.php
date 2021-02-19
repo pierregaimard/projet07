@@ -24,7 +24,7 @@ final class UserVoter extends Voter
     protected function supports($attribute, $subject): bool
     {
         $supportAttribute = in_array($attribute, ['USER_READ', 'USER_UPDATE', 'USER_DELETE']);
-        $supportSubject = $subject instanceof User;
+        $supportSubject   = $subject instanceof User;
 
         return $supportAttribute && $supportSubject;
     }
