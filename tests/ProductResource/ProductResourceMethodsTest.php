@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Resource;
+namespace App\Tests\ProductResource;
 
 use App\Tests\AbstractProductTestCase;
 
@@ -9,7 +9,7 @@ class ProductResourceMethodsTest extends AbstractProductTestCase
     public function testMethodsNotAllowed()
     {
         $this->refreshDatabase();
-        $this->setProductsFixtures();
+        $this->loadProductsFixtures();
         $client = self::createClient();
         $token = $this->createUserAndGetToken($client, 'test', 'pass', ['ROLE_USER'], 'myCompagny');
 
@@ -25,7 +25,7 @@ class ProductResourceMethodsTest extends AbstractProductTestCase
     public function testMethodsAllowed()
     {
         $this->refreshDatabase();
-        $this->setProductsFixtures();
+        $this->loadProductsFixtures();
         $client = self::createClient();
         $token = $this->createUserAndGetToken($client, 'test', 'pass', ['ROLE_USER'], 'myCompagny');
 

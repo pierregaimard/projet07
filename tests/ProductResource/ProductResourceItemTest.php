@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Resource;
+namespace App\Tests\ProductResource;
 
 use App\Entity\Product;
 use App\Tests\AbstractProductTestCase;
