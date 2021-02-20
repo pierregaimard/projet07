@@ -1,6 +1,19 @@
 {
+    "name": "pierregaimard/projet07",
+    "description": "Php Symfony API study project",
     "type": "project",
-    "license": "proprietary",
+    "homepage": "https://oc-projet7.pierregaimard.fr/",
+    "readme": "README.md",
+    "time": "2021-02-01",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pierre Gaimard",
+            "email": "pierre@gaimard-family.fr",
+            "homepage": "https://github.com/pierregaimard",
+            "role": "Developper"
+        }
+    ],
     "require": {
         "php": ">=8.0",
         "ext-ctype": "*",
