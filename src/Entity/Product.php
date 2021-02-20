@@ -28,6 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'pagination_items_per_page' => 10,
         'pagination_maximum_items_per_page' => 30,
     ],
+    cacheHeaders: ['public' => true],
     formats: ['json', 'jsonld', 'jsonhal'],
     normalizationContext: [
         'groups' => 'product:read',
