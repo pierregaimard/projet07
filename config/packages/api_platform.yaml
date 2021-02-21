@@ -1,7 +1,7 @@
 api_platform:
     title: 'BileMo Customer API'
     description: 'BileMo Products reader and Customer Users management'
-    version: '1.0.0'
+    version: 'v1 [API Evolution]'
     show_webby: false
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
